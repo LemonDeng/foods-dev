@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.dzl.mapper.CategoryMapperCustom" >
+
+    <!--parameterType:传进来参数的类型-->
+    <!--每一个select查询出来的内容都要去对应一个相应的实体（即相对应的mapper）-->
+    <!--resultMap一种映射，会映射的一种具体的pojo-->
+    <!--type映射的那个类是什么-->
+    <resultMap id="myCategoryVO" type="com.dzl.pojo.vo.CategoryVO">
+    <!--里面需要做一些相应的基本映射-->
+        <!--column对应sql里面的字段-->
+        <!--property对应pojo里面的实体类-->
+        <id column="id" property="id" />
+        <result column="name" property="name" />
+        <result column="type" property="type" />
+        <result column="fatherId" property="fatherId" />
+        <result column="name" property="name" />
+
+        <!--CategoryVO里面还有个SubCategoryVO需要用到collection标签集合-->
+        <!--ofType指subCatList对应的VO类型是什么-->
+        <!--
+            collection标签：用于定义关联的List集合类型的封装规则
+            property：对应三级分类的list属性名
+            ofType:集合的类型，三级分类的vo
+        -->
+        <collection property="subCatList" ofType="com.dzl.pojo.vo.SubCategoryVO">
+            <id column="subId" property="subId" />
+            <result column="subName" property="subName" />
+            <result column="subType" property="subType" />
+            <result column="subFatherId" property="subFatherId" />
+
+
+        </collection>
+
+
+
+    </resultMap>
+    <!--parameterType:传进来参数的类型-->
+    <!--每一个select查询出来的内容都要去对应一个相应的实体（即相对应的mapper）-->
+    <!--resultMap一种映射，会映射的一种具体的pojo-->
+  <select id="getSubCatList" parameterType="int" resultMap="myCategoryVO">
+            SELECT
+            f.id AS id,
+            f.`name` as `name`,
+            f.type as type,
+            f.father_id as fatherId,
+            c.id AS subId,
+            c.`name` as `subName`,
+            c.type as subType,
+            c.father_id as subFatherId
+            FROM
+            category f
+            LEFT JOIN
+            category c
+            ON
+            f.id = c.father_id
+            WHERE
+            f.father_id = #{rootCatId}
+    </select>
+
+</mapper>
