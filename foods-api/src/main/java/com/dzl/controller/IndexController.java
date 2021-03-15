@@ -38,7 +38,7 @@ public class IndexController {
         List<Carousel> list = carouselService.queryAll(YesOrNo.YES.type);//使用枚举来增加方法的多样性
         return DZLJSONResult.ok(list);
     }
-   
+
     /**
      * 首页分类展示需求：
      * 1. 第一次刷新主页查询大分类，渲染展示到首页
@@ -53,11 +53,13 @@ public class IndexController {
    }
 
     @ApiOperation(value = "获取商品子分类", notes = "获取商品子分类", httpMethod = "GET")
-    @GetMapping("/subCat/{rootCatId}")
+    @GetMapping("/subCat/{rootCatId}")//rootCatId路径参数，首先需要{}占位符，把路径参数写进去
     public DZLJSONResult subCat(
+            //接口文档给前端对接人员观看的
             @ApiParam(name = "rootCatId", value = "一级分类id", required = true)
+            //路径参数在参数位置要加上一个注解@PathVariable
             @PathVariable Integer rootCatId) {
-
+        //判断传进来的父id是否为空，则不做任何的查询直接报错
         if (rootCatId == null) {
             return DZLJSONResult.errorMsg("分类不存在");
         }

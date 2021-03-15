@@ -2,7 +2,9 @@ package com.dzl.pojo.bo;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-
+/*
+* BO用于和业务打交道的实体类
+* */
 @ApiModel(value = "用户对象BO",description = "从客户端，由用户传入的数据对象封装在此entity中")
 public class UserBO {
 

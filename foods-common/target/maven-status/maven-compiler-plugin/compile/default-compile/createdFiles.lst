@@ -23,6 +23,7 @@ org\n3r\idworker\strategy\DayPrefixRandomCodeStrategy.class
 com\dzl\utils\JsonUtils.class
 org\n3r\idworker\IdWorker.class
 com\dzl\utils\CookieUtils.class
+com\dzl\enums\NumberThree.class
 org\n3r\idworker\strategy\DefaultWorkerIdStrategy$1.class
 org\n3r\idworker\utils\Serializes.class
 org\n3r\idworker\InvalidSystemClock.class

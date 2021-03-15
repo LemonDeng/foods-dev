@@ -4,6 +4,8 @@ import java.util.List;
 
 /**
  * 二级分类VO
+ * BO与数据层打交道的实体类
+ *
  */
 public class CategoryVO {
 
@@ -12,7 +14,7 @@ public class CategoryVO {
     private String type;
     private Integer fatherId;
 
-    // 三级分类vo list
+    // 把三级分类作为一个List封装到二级分类里面··········三级分类vo list
     private List<SubCategoryVO> subCatList;
 
     public Integer getId() {
