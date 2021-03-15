@@ -1,5 +1,6 @@
 package com.dzl.service.impl;
 
+import com.dzl.enums.NumberThree;
 import com.dzl.mapper.CategoryMapper;
 import com.dzl.mapper.CategoryMapperCustom;
 import com.dzl.pojo.Category;
@@ -32,7 +33,7 @@ public class CategoryServiceImpl implements CategoryService {
 
         Example example = new Example(Category.class);
         Example.Criteria criteria = example.createCriteria();
-        criteria.andEqualTo("type", 1);
+        criteria.andEqualTo("type", NumberThree.one);
 
         List<Category> result =  categoryMapper.selectByExample(example);
 
