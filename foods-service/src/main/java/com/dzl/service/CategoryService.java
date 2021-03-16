@@ -2,6 +2,7 @@ package com.dzl.service;
 
 import com.dzl.pojo.Category;
 import com.dzl.pojo.vo.CategoryVO;
+import com.dzl.pojo.vo.NewItemsVO;
 //import com.dzl.pojo.vo.NewItemsVO;
 
 import java.util.List;
@@ -26,6 +27,6 @@ public interface CategoryService {
      * @param rootCatId
      * @return
      */
-   // public List<NewItemsVO> getSixNewItemsLazy(Integer rootCatId);
+    public List<NewItemsVO> getSixNewItemsLazy(Integer rootCatId);
 
 }

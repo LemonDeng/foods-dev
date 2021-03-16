@@ -58,4 +58,62 @@
             f.father_id = #{rootCatId}
     </select>
 
+    <resultMap id="myNewItemsVO" type="com.dzl.pojo.vo.NewItemsVO">
+        <!--里面需要做一些相应的基本映射-->
+        <!--column对应sql里面的字段-->
+        <!--property对应pojo里面的实体类-->
+        <id column="rootCatId" property="rootCatId" />
+        <result column="rootCatName" property="rootCatName" />
+        <result column="slogan" property="slogan" />
+        <result column="catImage" property="catImage" />
+        <result column="bgColor" property="bgColor" />
+
+        <!--CategoryVO里面还有个SubCategoryVO需要用到collection标签集合-->
+        <!--ofType指subCatList对应的VO类型是什么-->
+        <!--
+            collection标签：用于定义关联的List集合类型的封装规则
+            property：对应三级分类的list属性名
+            ofType:集合的类型，三级分类的vo
+        -->
+        <collection property="simpleItemList" ofType="com.dzl.pojo.vo.SimpleItemVO">
+            <id column="itmeId" property="itmeId" />
+            <result column="itemName" property="itemName" />
+            <result column="itemUrl" property="itemUrl" />
+
+        </collection>
+
+    </resultMap>
+    <select id="getSixNewItemsLazy" resultMap="myNewItemsVO" parameterType="Map">
+        SELECT
+            f.id AS rootCatId,
+            f.`name` as rootCatName,
+            f.slogan as slogan,
+            f.cat_image AS catImage,
+            f.bg_color AS bgColor,
+            i.id AS itmeId,
+            i.item_name AS itemName,
+            ii.url AS itemUrl,
+            i.created_time AS createdTime
+            FROM
+            category f
+            LEFT JOIN
+            items i
+            ON
+            f.id = i.root_cat_id
+            LEFT JOIN
+            items_img ii
+            on
+            i.id = ii.item_id
+            WHERE
+            f.type = 1
+            AND
+             i.root_cat_id = #{paramsMap.rootCatId}
+            AND
+                ii.is_main = 1
+            ORDER BY i.created_time DESC
+            LIMIT 0,6
+
+
+    </select>
+
 </mapper>

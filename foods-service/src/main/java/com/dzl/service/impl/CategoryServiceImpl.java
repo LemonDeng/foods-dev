@@ -6,6 +6,7 @@ import com.dzl.mapper.CategoryMapperCustom;
 import com.dzl.pojo.Category;
 import com.dzl.pojo.vo.CategoryVO;
 //import com.dzl.pojo.vo.NewItemsVO;
+import com.dzl.pojo.vo.NewItemsVO;
 import com.dzl.service.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -13,7 +14,9 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 import tk.mybatis.mapper.entity.Example;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class CategoryServiceImpl implements CategoryService {
@@ -45,7 +48,15 @@ public class CategoryServiceImpl implements CategoryService {
         return categoryMapperCustom.getSubCatList(rootCatId);
     }
 
-   /* @Transactional(propagation = Propagation.SUPPORTS)
+    @Transactional(propagation = Propagation.SUPPORTS)
+    @Override
+    public List<NewItemsVO> getSixNewItemsLazy(Integer rootCatId) {
+        Map<String,Object> map = new HashMap<>();
+        map.put("rootCatId",rootCatId);
+        return categoryMapperCustom.getSixNewItemsLazy(map);
+    }
+
+    /* @Transactional(propagation = Propagation.SUPPORTS)
     @Override
     public List<NewItemsVO> getSixNewItemsLazy(Integer rootCatId) {
 
