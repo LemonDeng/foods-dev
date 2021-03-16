@@ -106,6 +106,12 @@
             <version>2.1.5</version>
         </dependency>
 
+        <!--pagehelper 分页工具 -->
+        <dependency>
+            <groupId>com.github.pagehelper</groupId>
+            <artifactId>pagehelper-spring-boot-starter</artifactId>
+            <version>1.2.12</version>
+        </dependency>
 
         <!-- apache 工具类 -->
         <dependency>

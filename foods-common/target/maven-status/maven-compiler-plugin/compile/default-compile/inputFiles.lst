@@ -17,6 +17,7 @@ E:\gitRepos\foods-dev\foods-common\src\main\java\org\n3r\idworker\strategy\Defau
 E:\gitRepos\foods-dev\foods-common\src\main\java\org\n3r\idworker\IdWorker.java
 E:\gitRepos\foods-dev\foods-common\src\main\java\com\dzl\utils\DateUtil.java
 E:\gitRepos\foods-dev\foods-common\src\main\java\org\n3r\idworker\utils\Serializes.java
+E:\gitRepos\foods-dev\foods-common\src\main\java\com\dzl\utils\PagedGridResult.java
 E:\gitRepos\foods-dev\foods-common\src\main\java\org\n3r\idworker\DayCode.java
 E:\gitRepos\foods-dev\foods-common\src\main\java\org\n3r\idworker\InvalidSystemClock.java
 E:\gitRepos\foods-dev\foods-common\src\main\java\org\n3r\idworker\Code.java
@@ -25,3 +26,4 @@ E:\gitRepos\foods-dev\foods-common\src\main\java\com\dzl\utils\DZLJSONResult.jav
 E:\gitRepos\foods-dev\foods-common\src\main\java\org\n3r\idworker\strategy\DefaultRandomCodeStrategy.java
 E:\gitRepos\foods-dev\foods-common\src\main\java\org\n3r\idworker\strategy\FileLock.java
 E:\gitRepos\foods-dev\foods-common\src\main\java\org\n3r\idworker\RandomCodeStrategy.java
+E:\gitRepos\foods-dev\foods-common\src\main\java\com\dzl\enums\CommentLevel.java

@@ -2,6 +2,8 @@ package com.dzl.service;
 
 import com.dzl.pojo.*;
 import com.dzl.pojo.vo.CommentLevelCountsVO;
+import com.dzl.pojo.vo.ItemCommentVO;
+import com.dzl.utils.PagedGridResult;
 
 
 import java.util.List;
@@ -43,4 +45,11 @@ public interface ItemService {
      */
     public CommentLevelCountsVO queryCommentCounts(String itemId);
 
+    /**
+     * 这是根据商品id查询商品的评价
+     * @param itemId
+     * @param level
+     * @return
+     */
+    public PagedGridResult queryPagedComments(String itemId, Integer level, Integer page, Integer pageSize);
 }

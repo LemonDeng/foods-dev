@@ -15,6 +15,7 @@ com\dzl\pojo\vo\ItemInfoVO.class
 com\dzl\pojo\vo\CommentLevelCountsVO.class
 com\dzl\pojo\OrderStatus.class
 com\dzl\pojo\Carousel.class
+com\dzl\pojo\vo\ItemCommentVO.class
 com\dzl\pojo\vo\NewItemsVO.class
 com\dzl\pojo\ItemsSpec.class
 com\dzl\pojo\UserAddress.class

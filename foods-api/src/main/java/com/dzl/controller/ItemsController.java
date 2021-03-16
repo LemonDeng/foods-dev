@@ -10,6 +10,7 @@ import com.dzl.service.CarouselService;
 import com.dzl.service.CategoryService;
 import com.dzl.service.ItemService;
 import com.dzl.utils.DZLJSONResult;
+import com.dzl.utils.PagedGridResult;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
@@ -18,6 +19,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+
+import static com.dzl.controller.BaseController.COMMON_PAGE_SIZE;
 
 //@Controller   SpringMVC里面用的比较多用于页面的跳转
 @Api(value = "商品接口",tags = "商品信息展示的相关接口")
@@ -74,6 +77,37 @@ public class ItemsController {
         CommentLevelCountsVO countsVO = itemService.queryCommentCounts(itemId);
 
         return DZLJSONResult.ok(countsVO);
+    }
+    @ApiOperation(value = "查询商品评论", notes = "查询商品评论", httpMethod = "GET")
+    @GetMapping("/comments")
+    public DZLJSONResult comments(
+            @ApiParam(name = "itemId", value = "商品id", required = true)
+            @RequestParam String itemId,
+            @ApiParam(name = "level", value = "评价等级", required = false)
+            @RequestParam Integer level,
+            @ApiParam(name = "page", value = "查询下一页的第几页", required = false)
+            @RequestParam Integer page,
+            @ApiParam(name = "pageSize", value = "分页的每一页显示的条数", required = false)
+            @RequestParam Integer pageSize) {
+
+        if (StringUtils.isBlank(itemId)) {
+            return DZLJSONResult.errorMsg(null);
+        }
+
+        if (page == null) {
+            page = 1;
+        }
+
+        if (pageSize == null) {
+            pageSize = COMMON_PAGE_SIZE;
+        }
+
+        PagedGridResult grid = itemService.queryPagedComments(itemId,
+                level,
+                page,
+                pageSize);
+
+        return DZLJSONResult.ok(grid);
     }
 }
 

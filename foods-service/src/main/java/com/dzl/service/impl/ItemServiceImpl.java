@@ -2,9 +2,13 @@ package com.dzl.service.impl;
 
 import com.dzl.enums.CommentLevel;
 import com.dzl.pojo.vo.CommentLevelCountsVO;
+import com.dzl.pojo.vo.ItemCommentVO;
 import com.dzl.service.ItemService;
 import com.dzl.mapper.*;
 import com.dzl.pojo.*;
+import com.dzl.utils.PagedGridResult;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
@@ -117,5 +121,35 @@ public class ItemServiceImpl implements ItemService {
         return itemsCommentsMapper.selectCount(condition);
     }
 
+    @Transactional(propagation = Propagation.SUPPORTS)
+    @Override
+    public PagedGridResult queryPagedComments(String itemId, Integer level,Integer page,Integer pageSize) {
+        //因为查询的时候使用了一个Map,所以先把Map给new出来
+        Map<String,Object> map = new HashMap<>();
+        //相应的参数也要放进去
+        map.put("itemId",itemId);
+        map.put("level",level);
+        //mybatis-pagehelper 分页插件
+        /**
+         * page: 第几页
+         * pageSize: 每页显示条数
+         * 这两个参数都是前端传进来的，所以要去service添加额外的参数
+         */
+        PageHelper.startPage(page, pageSize);//开始执行分页
+        //下面的方法是去数据库查询评论的，所以要在之前进行分页拦截
+        List<ItemCommentVO> list = itemsMapperCustom.queryItemComments(map);
 
+        //分页数据封装到 PagedGridResult.java 传给前端
+
+        return setterPagedGrid(list,page);
+    }
+    private PagedGridResult setterPagedGrid(List<?> list, Integer page) {
+        PageInfo<?> pageList = new PageInfo<>(list);
+        PagedGridResult grid = new PagedGridResult();
+        grid.setPage(page);
+        grid.setRows(list);
+        grid.setTotal(pageList.getPages());
+        grid.setRecords(pageList.getTotal());
+        return grid;
+    }
 }

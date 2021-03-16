@@ -10,6 +10,7 @@ org\n3r\idworker\utils\Props.class
 org\n3r\idworker\strategy\DefaultRandomCodeStrategy$1.class
 com\dzl\utils\DZLJSONResult.class
 com\dzl\utils\MD5Utils.class
+com\dzl\utils\PagedGridResult.class
 org\n3r\idworker\Sid.class
 com\dzl\enums\Sex.class
 com\dzl\utils\DateUtil.class
