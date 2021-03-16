@@ -1,3 +1,4 @@
+com\dzl\controller\ItemsController.class
 com\dzl\controller\PassportController.class
 com\dzl\controller\StuFooController.class
 com\dzl\config\Swagger2.class

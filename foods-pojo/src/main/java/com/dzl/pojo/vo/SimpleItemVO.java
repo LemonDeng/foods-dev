@@ -8,17 +8,19 @@ import java.util.List;
  */
 public class SimpleItemVO {
 
-    private Integer itmeId;
+    private String itemId;
     private String itemName;
     private String itemUrl;
 
-    public Integer getItmeId() {
-        return itmeId;
+    public String getItemId() {
+        return itemId;
     }
 
-    public void setItmeId(Integer itmeId) {
-        this.itmeId = itmeId;
+    public void setItemId(String itemId) {
+        this.itemId = itemId;
     }
+
+
 
     public String getItemName() {
         return itemName;

@@ -76,7 +76,7 @@
             ofType:集合的类型，三级分类的vo
         -->
         <collection property="simpleItemList" ofType="com.dzl.pojo.vo.SimpleItemVO">
-            <id column="itmeId" property="itmeId" />
+            <id column="itemId" property="itemId" />
             <result column="itemName" property="itemName" />
             <result column="itemUrl" property="itemUrl" />
 
@@ -90,7 +90,7 @@
             f.slogan as slogan,
             f.cat_image AS catImage,
             f.bg_color AS bgColor,
-            i.id AS itmeId,
+            i.id AS itemId,
             i.item_name AS itemName,
             ii.url AS itemUrl,
             i.created_time AS createdTime
