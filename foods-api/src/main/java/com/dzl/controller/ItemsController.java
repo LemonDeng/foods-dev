@@ -3,6 +3,7 @@ package com.dzl.controller;
 import com.dzl.enums.YesOrNo;
 import com.dzl.pojo.*;
 import com.dzl.pojo.vo.CategoryVO;
+import com.dzl.pojo.vo.CommentLevelCountsVO;
 import com.dzl.pojo.vo.ItemInfoVO;
 import com.dzl.pojo.vo.NewItemsVO;
 import com.dzl.service.CarouselService;
@@ -14,10 +15,7 @@ import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -43,7 +41,10 @@ public class ItemsController {
         if (StringUtils.isBlank(itemId)) {
             return DZLJSONResult.errorMsg(null);
         }
-
+        /**
+         * 在一个Controller里面调用四个service方法
+         * 构建VO来传递多个对象
+         */
         Items item = itemService.queryItemById(itemId);
         List<ItemsSpec> itemsSpecList = itemService.queryItemSpecList(itemId);
         List<ItemsImg> itemImgList = itemService.queryItemImgList(itemId);
@@ -59,6 +60,20 @@ public class ItemsController {
         itemInfoVO.setItemParams(itemsParam);
         return DZLJSONResult.ok(itemInfoVO);
 
+    }
+    @ApiOperation(value = "查询商品评价等级", notes = "查询商品评价等级", httpMethod = "GET")
+    @GetMapping("/commentLevel")
+    public DZLJSONResult commentLevel(
+            @ApiParam(name = "itemId", value = "商品id", required = true)
+            @RequestParam String itemId) {//请求参数用注解@RequestParam
+
+        if (StringUtils.isBlank(itemId)) {
+            return DZLJSONResult.errorMsg(null);
+        }
+
+        CommentLevelCountsVO countsVO = itemService.queryCommentCounts(itemId);
+
+        return DZLJSONResult.ok(countsVO);
     }
 }
 

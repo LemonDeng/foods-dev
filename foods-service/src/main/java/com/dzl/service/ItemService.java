@@ -1,8 +1,7 @@
 package com.dzl.service;
 
 import com.dzl.pojo.*;
-
-
+import com.dzl.pojo.vo.CommentLevelCountsVO;
 
 
 import java.util.List;
@@ -36,5 +35,12 @@ public interface ItemService {
      * @return
      */
     public ItemsParam queryItemParam(String itemId);
+
+    /**
+     * 根据商品id查询商品的评价等级数量
+     * 返回的是一个商品的所有的评价信息，所以用VO展示即可，不需要用到List集合来装载
+     * @param itemId
+     */
+    public CommentLevelCountsVO queryCommentCounts(String itemId);
 
 }

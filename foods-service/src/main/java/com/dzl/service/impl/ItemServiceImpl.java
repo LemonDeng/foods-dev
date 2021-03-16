@@ -1,5 +1,7 @@
 package com.dzl.service.impl;
 
+import com.dzl.enums.CommentLevel;
+import com.dzl.pojo.vo.CommentLevelCountsVO;
 import com.dzl.service.ItemService;
 import com.dzl.mapper.*;
 import com.dzl.pojo.*;
@@ -80,5 +82,40 @@ public class ItemServiceImpl implements ItemService {
 
         return itemsParamMapper.selectOneByExample(itemsParamExp);
     }
+
+    @Transactional(propagation = Propagation.SUPPORTS)
+    @Override
+    public CommentLevelCountsVO queryCommentCounts(String itemId) {
+        //level自己写死分别为1、2、3
+        Integer goodCounts = getCommentCounts(itemId, CommentLevel.GOOD.type);
+        Integer normalCounts = getCommentCounts(itemId, CommentLevel.NORMAL.type);
+        Integer badCounts = getCommentCounts(itemId, CommentLevel.BAD.type);
+        Integer totalCounts = goodCounts + normalCounts + badCounts;
+
+        CommentLevelCountsVO countsVO = new CommentLevelCountsVO();
+        countsVO.setTotalCounts(totalCounts);
+        countsVO.setGoodCounts(goodCounts);
+        countsVO.setNormalCounts(normalCounts);
+        countsVO.setBadCounts(badCounts);
+
+        return countsVO;
+    }
+
+    /**
+     * 根据商品的Id查询不同等级的评价
+     * @param itemId
+     * @param level
+     * @return
+     */
+    @Transactional(propagation = Propagation.SUPPORTS)
+    Integer getCommentCounts(String itemId, Integer level) {
+        ItemsComments condition = new ItemsComments();
+        condition.setItemId(itemId);
+        if (level != null) {
+            condition.setCommentLevel(level);
+        }
+        return itemsCommentsMapper.selectCount(condition);
+    }
+
 
 }
