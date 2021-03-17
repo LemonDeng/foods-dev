@@ -4,6 +4,7 @@ import com.dzl.enums.CommentLevel;
 import com.dzl.pojo.vo.CommentLevelCountsVO;
 import com.dzl.pojo.vo.ItemCommentVO;
 import com.dzl.pojo.vo.SearchItemsVO;
+import com.dzl.pojo.vo.ShopcartVO;
 import com.dzl.service.ItemService;
 import com.dzl.mapper.*;
 import com.dzl.pojo.*;
@@ -193,5 +194,15 @@ public class ItemServiceImpl implements ItemService {
         List<SearchItemsVO> list = itemsMapperCustom.searchItemsByThirdCat(map);
         //拿到List之后再去封装
         return setterPagedGrid(list,page);
+    }
+
+    @Transactional(propagation = Propagation.SUPPORTS)
+    @Override
+    public List<ShopcartVO> queryItemsBySpecIds(String specIds) {
+        String ids[] = specIds.split(",");
+        List<String> specIdsList = new ArrayList<>();
+        Collections.addAll(specIdsList, ids);
+
+        return itemsMapperCustom.queryItemsBySpecIds(specIdsList);
     }
 }

@@ -12,9 +12,11 @@ com\dzl\pojo\ItemsImg.class
 com\dzl\pojo\Orders.class
 com\dzl\pojo\Items.class
 com\dzl\pojo\OrderItems.class
+com\dzl\pojo\bo\ShopcartBO.class
 com\dzl\pojo\vo\ItemInfoVO.class
 com\dzl\pojo\vo\CommentLevelCountsVO.class
 com\dzl\pojo\OrderStatus.class
+com\dzl\pojo\vo\ShopcartVO.class
 com\dzl\pojo\Carousel.class
 com\dzl\pojo\vo\ItemCommentVO.class
 com\dzl\pojo\vo\NewItemsVO.class
