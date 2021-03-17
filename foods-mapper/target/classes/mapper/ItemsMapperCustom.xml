@@ -6,7 +6,25 @@
  <!--resultType映射一个自定义的Pojo,作为显示层的对象去展示的-->
  <select id="queryItemComments" parameterType="Map" resultType="com.dzl.pojo.vo.ItemCommentVO">
 
-    SELECT
+     SELECT
+     ic.comment_level as commentLevel,
+     ic.content as content,
+     ic.sepc_name as specName,
+     ic.created_time as createdTime,
+     u.face as userFace,
+     u.nickname as nickname
+     FROM
+     items_comments ic
+     LEFT JOIN
+     users u
+     ON
+     ic.user_id = u.id
+     WHERE
+     ic.item_id = #{paramsMap.itemId}
+     <if test=" paramsMap.level != null and paramsMap.level != '' ">
+         AND ic.comment_level = #{paramsMap.level}
+     </if>
+   <!-- SELECT
          ic.comment_level as commentLevel,
          ic.content as content,
          ic.sepc_name as sepcName,
@@ -21,14 +39,14 @@
          ic.user_id = u.id
          WHERE
          /*传进来的参数是一个map，并且会携带一个itemId*/
-         ic.item_id = #{parasMap.itemId}
+         ic.item_id = #{paramsMap.itemId}
          AND
          /*if判断的条件语句，test必须要填写*/
-         <if test="parasMap.level != null and parasMap.level != ''">
+         <if test=" paramsMap.level != null and paramsMap.level != '' ">
           AND
           /*如果符合条件则填写相应的level*/
-          c.comment_level = #{parasMap.level}
-         </if>
+          c.comment_level = #{paramsMap.level}
+         </if>-->
 
  </select>
 

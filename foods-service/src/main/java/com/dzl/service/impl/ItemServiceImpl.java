@@ -6,6 +6,7 @@ import com.dzl.pojo.vo.ItemCommentVO;
 import com.dzl.service.ItemService;
 import com.dzl.mapper.*;
 import com.dzl.pojo.*;
+import com.dzl.utils.DesensitizationUtil;
 import com.dzl.utils.PagedGridResult;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
@@ -138,6 +139,10 @@ public class ItemServiceImpl implements ItemService {
         PageHelper.startPage(page, pageSize);//开始执行分页
         //下面的方法是去数据库查询评论的，所以要在之前进行分页拦截
         List<ItemCommentVO> list = itemsMapperCustom.queryItemComments(map);
+        //for循环拿到每一个item商品，然后获得它的Nickname然后进行脱敏，再重新进行set
+        for (ItemCommentVO vo : list) {
+            vo.setNickname(DesensitizationUtil.commonDisplay(vo.getNickname()));
+        }
 
         //分页数据封装到 PagedGridResult.java 传给前端
 
