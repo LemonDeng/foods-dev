@@ -3,6 +3,7 @@ package com.dzl.service.impl;
 import com.dzl.enums.CommentLevel;
 import com.dzl.pojo.vo.CommentLevelCountsVO;
 import com.dzl.pojo.vo.ItemCommentVO;
+import com.dzl.pojo.vo.SearchItemsVO;
 import com.dzl.service.ItemService;
 import com.dzl.mapper.*;
 import com.dzl.pojo.*;
@@ -36,6 +37,7 @@ public class ItemServiceImpl implements ItemService {
 
     /**
      * 根据商品ID查询详情，单个商品的详情
+     *
      * @param itemId
      * @return
      */
@@ -47,6 +49,7 @@ public class ItemServiceImpl implements ItemService {
 
     /**
      * 根据商品id查询商品图片列表,查询出来的是多个图片所以用List
+     *
      * @param itemId
      * @return
      */
@@ -59,8 +62,10 @@ public class ItemServiceImpl implements ItemService {
 
         return itemsImgMapper.selectByExample(itemsImgExp);
     }
+
     /**
      * 根据商品id查询商品规格，商品的规格有多个用List
+     *
      * @param itemId
      * @return
      */
@@ -73,8 +78,10 @@ public class ItemServiceImpl implements ItemService {
 
         return itemsSpecMapper.selectByExample(itemsSpecExp);
     }
+
     /**
      * 根据商品id查询商品参数
+     *
      * @param itemId
      * @return
      */
@@ -108,6 +115,7 @@ public class ItemServiceImpl implements ItemService {
 
     /**
      * 根据商品的Id查询不同等级的评价
+     *
      * @param itemId
      * @param level
      * @return
@@ -124,12 +132,12 @@ public class ItemServiceImpl implements ItemService {
 
     @Transactional(propagation = Propagation.SUPPORTS)
     @Override
-    public PagedGridResult queryPagedComments(String itemId, Integer level,Integer page,Integer pageSize) {
+    public PagedGridResult queryPagedComments(String itemId, Integer level, Integer page, Integer pageSize) {
         //因为查询的时候使用了一个Map,所以先把Map给new出来
-        Map<String,Object> map = new HashMap<>();
+        Map<String, Object> map = new HashMap<>();
         //相应的参数也要放进去
-        map.put("itemId",itemId);
-        map.put("level",level);
+        map.put("itemId", itemId);
+        map.put("level", level);
         //mybatis-pagehelper 分页插件
         /**
          * page: 第几页
@@ -146,8 +154,9 @@ public class ItemServiceImpl implements ItemService {
 
         //分页数据封装到 PagedGridResult.java 传给前端
 
-        return setterPagedGrid(list,page);
+        return setterPagedGrid(list, page);
     }
+
     private PagedGridResult setterPagedGrid(List<?> list, Integer page) {
         PageInfo<?> pageList = new PageInfo<>(list);
         PagedGridResult grid = new PagedGridResult();
@@ -156,5 +165,33 @@ public class ItemServiceImpl implements ItemService {
         grid.setTotal(pageList.getPages());
         grid.setRecords(pageList.getTotal());
         return grid;
+    }
+
+    @Transactional(propagation = Propagation.SUPPORTS)
+    @Override
+    public PagedGridResult searchItems(String keywords, String sort, Integer page, Integer pageSize) {
+        Map<String, Object> map = new HashMap<>();
+        //相应的参数也要放进去
+        map.put("keywords", keywords);
+        map.put("sort", sort);
+        //在执行mapper之前实行分页插件
+        PageHelper.startPage(page, pageSize);//开始执行分页
+        List<SearchItemsVO> list = itemsMapperCustom.searchItems(map);
+        //拿到List之后再去封装
+        return setterPagedGrid(list,page);
+    }
+
+    @Transactional(propagation = Propagation.SUPPORTS)
+    @Override
+    public PagedGridResult searchItemsByThirdCat(Integer catId, String sort, Integer page, Integer pageSize) {
+        Map<String, Object> map = new HashMap<>();
+        //相应的参数也要放进去
+        map.put("catId", catId);
+        map.put("sort", sort);
+        //在执行mapper之前实行分页插件
+        PageHelper.startPage(page, pageSize);//开始执行分页
+        List<SearchItemsVO> list = itemsMapperCustom.searchItemsByThirdCat(map);
+        //拿到List之后再去封装
+        return setterPagedGrid(list,page);
     }
 }

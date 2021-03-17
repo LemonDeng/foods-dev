@@ -3,6 +3,7 @@ com\dzl\pojo\ItemsParam.class
 com\dzl\pojo\vo\CategoryVO.class
 com\dzl\pojo\Category.class
 com\dzl\pojo\vo\SimpleItemVO.class
+com\dzl\pojo\vo\SearchItemsVO.class
 com\dzl\pojo\bo\UserBO.class
 com\dzl\pojo\vo\SubCategoryVO.class
 com\dzl\pojo\ItemsComments.class
