@@ -154,7 +154,7 @@
         t_items_img.is_main = 1
         AND
         t_items_spec.id IN
---         for循环进行拼接
+        --         for循环进行拼接
         <foreach collection="paramsList" index="index" item="specId" open="(" separator="," close=")">
             #{specId}
         </foreach>
