@@ -1,11 +1,12 @@
-com\dzl\service\impl\CarouselServiceImpl.class
 com\dzl\service\impl\CategoryServiceImpl.class
 com\dzl\service\impl\ItemServiceImpl.class
-com\dzl\service\impl\AddressServiceImpl.class
-com\dzl\service\ItemService.class
 com\dzl\service\UserService.class
 com\dzl\service\CarouselService.class
 com\dzl\service\impl\StuServiceImpl.class
-com\dzl\service\StuService.class
+com\dzl\service\impl\center\CenterUserServiceImpl.class
 com\dzl\service\CategoryService.class
+com\dzl\service\impl\CarouselServiceImpl.class
+com\dzl\service\impl\AddressServiceImpl.class
+com\dzl\service\ItemService.class
+com\dzl\service\StuService.class
 com\dzl\service\impl\UserServiceImpl.class

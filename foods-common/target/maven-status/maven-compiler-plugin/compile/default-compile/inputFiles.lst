@@ -1,4 +1,5 @@
 E:\gitRepos\foods-dev\foods-common\src\main\java\org\n3r\idworker\utils\Ip.java
+E:\gitRepos\foods-dev\foods-common\src\main\java\com\dzl\enums\PayMethod.java
 E:\gitRepos\foods-dev\foods-common\src\main\java\org\n3r\idworker\Id.java
 E:\gitRepos\foods-dev\foods-common\src\main\java\org\n3r\idworker\WorkerIdStrategy.java
 E:\gitRepos\foods-dev\foods-common\src\main\java\com\dzl\enums\Sex.java
@@ -18,6 +19,7 @@ E:\gitRepos\foods-dev\foods-common\src\main\java\org\n3r\idworker\strategy\Defau
 E:\gitRepos\foods-dev\foods-common\src\main\java\org\n3r\idworker\IdWorker.java
 E:\gitRepos\foods-dev\foods-common\src\main\java\com\dzl\utils\DateUtil.java
 E:\gitRepos\foods-dev\foods-common\src\main\java\org\n3r\idworker\utils\Serializes.java
+E:\gitRepos\foods-dev\foods-common\src\main\java\com\dzl\enums\OrderStatusEnum.java
 E:\gitRepos\foods-dev\foods-common\src\main\java\com\dzl\utils\PagedGridResult.java
 E:\gitRepos\foods-dev\foods-common\src\main\java\org\n3r\idworker\DayCode.java
 E:\gitRepos\foods-dev\foods-common\src\main\java\org\n3r\idworker\InvalidSystemClock.java

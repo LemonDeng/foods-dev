@@ -1,6 +1,7 @@
 com\dzl\controller\ItemsController.class
 com\dzl\controller\StuFooController.class
 com\dzl\config\Swagger2.class
+com\dzl\controller\center\CenterController.class
 com\dzl\Application.class
 com\dzl\controller\OrdersController.class
 com\dzl\controller\BaseController.class

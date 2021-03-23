@@ -1,5 +1,6 @@
 E:\gitRepos\foods-dev\foods-service\src\main\java\com\dzl\service\impl\UserServiceImpl.java
 E:\gitRepos\foods-dev\foods-service\src\main\java\com\dzl\service\impl\ItemServiceImpl.java
+E:\gitRepos\foods-dev\foods-service\src\main\java\com\dzl\service\center\CenterUserService.java
 E:\gitRepos\foods-dev\foods-service\src\main\java\com\dzl\service\impl\CarouselServiceImpl.java
 E:\gitRepos\foods-dev\foods-service\src\main\java\com\dzl\service\UserService.java
 E:\gitRepos\foods-dev\foods-service\src\main\java\com\dzl\service\OrderService.java
@@ -10,5 +11,6 @@ E:\gitRepos\foods-dev\foods-service\src\main\java\com\dzl\service\CarouselServic
 E:\gitRepos\foods-dev\foods-service\src\main\java\com\dzl\service\impl\StuServiceImpl.java
 E:\gitRepos\foods-dev\foods-service\src\main\java\com\dzl\service\impl\CategoryServiceImpl.java
 E:\gitRepos\foods-dev\foods-service\src\main\java\com\dzl\service\AddressService.java
+E:\gitRepos\foods-dev\foods-service\src\main\java\com\dzl\service\impl\center\CenterUserServiceImpl.java
 E:\gitRepos\foods-dev\foods-service\src\main\java\com\dzl\service\impl\AddressServiceImpl.java
 E:\gitRepos\foods-dev\foods-service\src\main\java\com\dzl\service\StuService.java
