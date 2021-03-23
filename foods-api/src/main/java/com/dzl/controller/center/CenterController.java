@@ -29,6 +29,6 @@ public class CenterController {
         Users user = centerUserService.queryUserInfo(userId);
         return DZLJSONResult.ok(user);
     }
-    
+
 
 }
