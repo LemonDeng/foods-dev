@@ -30,7 +30,6 @@ public class AddressServiceImpl implements AddressService {
 
         UserAddress ua = new UserAddress();
         ua.setUserId(userId);
-        //根据传入的对象去筛选
         return userAddressMapper.select(ua);
     }
 

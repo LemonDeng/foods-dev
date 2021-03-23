@@ -22,7 +22,7 @@ import static com.dzl.controller.BaseController.PAGE_SIZE;
 
 //@Controller   SpringMVC里面用的比较多用于页面的跳转
 @Api(value = "商品接口",tags = "商品信息展示的相关接口")
-@RequestMapping("index")//首页所对应的路由
+@RequestMapping("items")//首页所对应的路由
 @RestController   /*默认返回出去的都是json对象*/
 
 public class ItemsController {
@@ -31,7 +31,7 @@ public class ItemsController {
     private ItemService itemService;
 
 
-    @ApiOperation(value = "查询商品详情", notes = "查询商品详情", httpMethod = "GET")
+    @ApiOperation(value = "查询商品详情", notes = "查询商品详情", httpMethod = "POST")
     @GetMapping("/info/{itemId}")//rootCatId路径参数，首先需要{}占位符，把路径参数写进去
     public DZLJSONResult subCat(
             //接口文档给前端对接人员观看的

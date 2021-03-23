@@ -30,8 +30,8 @@ public class AddressController {
     @Autowired
     private AddressService addressService;
 
-    @ApiOperation(value = "根据用户id查询收货地址列表", notes = "根据用户id查询收货地址列表", httpMethod = "GET")
-    @GetMapping("/list")
+    @ApiOperation(value = "根据用户id查询收货地址列表", notes = "根据用户id查询收货地址列表", httpMethod = "POST")
+    @PostMapping("/list")
     public DZLJSONResult list(
             @RequestParam String userId) {
 
@@ -57,6 +57,7 @@ public class AddressController {
 
         return DZLJSONResult.ok();
     }
+
     private DZLJSONResult checkAddress(AddressBO addressBO) {
         String receiver = addressBO.getReceiver();
         if (StringUtils.isBlank(receiver)) {

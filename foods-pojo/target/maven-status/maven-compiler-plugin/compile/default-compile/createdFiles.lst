@@ -12,6 +12,7 @@ com\dzl\pojo\Carousel.class
 com\dzl\pojo\vo\ItemCommentVO.class
 com\dzl\pojo\vo\NewItemsVO.class
 com\dzl\pojo\Users.class
+com\dzl\pojo\bo\SubmitOrderBO.class
 com\dzl\pojo\vo\SimpleItemVO.class
 com\dzl\pojo\ItemsImg.class
 com\dzl\pojo\Items.class
