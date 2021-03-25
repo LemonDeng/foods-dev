@@ -131,8 +131,8 @@ public class CenterUserController extends BaseController {
 
                     //对上传文件后缀的判断
                     if (!suffix.equalsIgnoreCase("png") &&
-                            !suffix.equalsIgnoreCase("png") &&
-                    !suffix.equalsIgnoreCase("png"))
+                            !suffix.equalsIgnoreCase("jpg") &&
+                    !suffix.equalsIgnoreCase("jpeg"))
                     {
                         DZLJSONResult.errorMsg("图片格式不正确");
                     }
