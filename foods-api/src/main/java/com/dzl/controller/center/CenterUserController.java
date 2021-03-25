@@ -129,6 +129,13 @@ public class CenterUserController extends BaseController {
                     //获取文件的后缀名
                     String suffix = fileNameArr[fileNameArr.length - 1];
 
+                    //对上传文件后缀的判断
+                    if (!suffix.equalsIgnoreCase("png") &&
+                            !suffix.equalsIgnoreCase("png") &&
+                    !suffix.equalsIgnoreCase("png"))
+                    {
+                        DZLJSONResult.errorMsg("图片格式不正确");
+                    }
                     // face-{userid}.png
                     // 文件名称重组 覆盖式上传，增量式：额外拼接当前时间
                     SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd-HH-mm-ss");
