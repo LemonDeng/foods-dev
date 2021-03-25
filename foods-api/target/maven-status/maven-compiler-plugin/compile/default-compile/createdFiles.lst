@@ -8,6 +8,8 @@ com\dzl\controller\BaseController.class
 com\dzl\config\CorsConfig.class
 com\dzl\controller\ShopcatController.class
 com\dzl\controller\IndexController.class
+META-INF\spring-configuration-metadata.json
+com\dzl\resource\FileUpload.class
 com\dzl\controller\center\CenterUserController.class
 com\dzl\controller\PassportController.class
 com\dzl\aspect\ServiceLogAspect.class

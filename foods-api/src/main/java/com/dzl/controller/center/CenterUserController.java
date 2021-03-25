@@ -4,6 +4,7 @@ import com.dzl.controller.BaseController;
 import com.dzl.pojo.Users;
 import com.dzl.pojo.bo.center.CenterUserBO;
 //import com.dzl.resource.FileUpload;
+import com.dzl.resource.FileUpload;
 import com.dzl.service.center.CenterUserService;
 import com.dzl.utils.CookieUtils;
 import com.dzl.utils.DZLJSONResult;
@@ -27,6 +28,8 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -39,6 +42,9 @@ public class CenterUserController extends BaseController {
     @Autowired
     private CenterUserService centerUserService;
 
+    @Autowired
+    private FileUpload fileUpload;
+
     @ApiOperation(value = "修改用户信息", notes = "修改用户信息", httpMethod = "POST")
     @PostMapping("update")
     public DZLJSONResult update(
@@ -49,9 +55,8 @@ public class CenterUserController extends BaseController {
             HttpServletRequest request, HttpServletResponse response) {
 
         //判断BindingResult是否保存错误的验证信息，如果有，则直接return
-        if (result.hasErrors())
-        {
-            Map<String,String> errorMap = getErrors(result);
+        if (result.hasErrors()) {
+            Map<String, String> errorMap = getErrors(result);
             return DZLJSONResult.errorMap(errorMap);
         }
 
@@ -62,23 +67,21 @@ public class CenterUserController extends BaseController {
         CookieUtils.setCookie(request, response, "user",
                 JsonUtils.objectToJson(userResult), true);
 
-         // TODO 后续要改，增加令牌token，会整合进redis，分布式会话
+        // TODO 后续要改，增加令牌token，会整合进redis，分布式会话
 
-            return DZLJSONResult.ok();
+        return DZLJSONResult.ok();
     }
 
-    private Map<String,String> getErrors(BindingResult result)
-    {
-        Map<String,String> map = new HashMap<>();
+    private Map<String, String> getErrors(BindingResult result) {
+        Map<String, String> map = new HashMap<>();
         //获取错误的所有属性存入List集合
         List<FieldError> errorList = result.getFieldErrors();
-        for (FieldError error : errorList)
-        {
+        for (FieldError error : errorList) {
             //发生验证错误所对应的某一个属性
             String errorField = error.getField();
             //验证的错误信息
             String errorMsg = error.getDefaultMessage();
-            map.put(errorField,errorMsg);
+            map.put(errorField, errorMsg);
         }
         return map;
 
@@ -93,5 +96,81 @@ public class CenterUserController extends BaseController {
         userResult.setBirthday(null);
         return userResult;
     }
+
+
+    @ApiOperation(value = "用户头像修改", notes = "用户头像修改", httpMethod = "POST")
+    @PostMapping("uploadFace")
+    public DZLJSONResult uploadFace(
+            @ApiParam(name = "userId", value = "用户id", required = true)
+                    String userId,
+            @ApiParam(name = "file", value = "用户头像", required = true)
+                    MultipartFile file,
+            HttpServletResponse response,
+            HttpServletRequest request) {
+        //首先定义头像保存的地址
+        String fileSpace = fileUpload.getImageUserFaceLocation();
+        //在路径上为每一个用户增加一个userId,用于区分不同用户上传
+        String uploadPathPrefix = File.separator + userId;
+
+        //开始文件上传
+        if (file != null)
+        {
+            FileOutputStream fileOutputStream = null;
+            //获得文件上传的文件名称
+            //Ctrl+Alt+t对代码块进行异常处理
+            try {
+                String fileName = file.getOriginalFilename();
+
+                if (StringUtils.isNotBlank(fileName))
+                {
+                    // 文件重命名  imooc-face.png -> ["imooc-face", "png"]
+                    String fileNameArr[] = fileName.split("\\.");
+
+                    //获取文件的后缀名
+                    String suffix = fileNameArr[fileNameArr.length - 1];
+
+                    // face-{userid}.png
+                    // 文件名称重组 覆盖式上传，增量式：额外拼接当前时间
+                    SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd-HH-mm-ss");
+                    Date date = new Date();
+                    String format = simpleDateFormat.format(date);
+                    String newFileName = "face-" + userId +"-"+ format +"." + suffix;
+           
+
+                    // 上传的头像最终保存的位置
+                    String finalFacePath = fileSpace + uploadPathPrefix + File.separator + newFileName;
+
+                    File outFile = new File(finalFacePath);
+                    //判断传进来的路径是否存在
+                    if (outFile.getParentFile() != null)
+                    {
+                        //创建文件夹
+                        outFile.getParentFile().mkdirs();
+                    }
+
+                    //文件输出保存到目录
+                    fileOutputStream = new FileOutputStream(outFile);
+                    InputStream inputStream = file.getInputStream();
+                    IOUtils.copy(inputStream, fileOutputStream);
+
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            } finally {
+                try {
+                    if (fileOutputStream != null) {
+                        fileOutputStream.flush();
+                        fileOutputStream.close();
+                    }
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        } else {
+            return DZLJSONResult.errorMsg("文件不能为空！");
+        }
+            return DZLJSONResult.ok();
+    }
+
 
 }
