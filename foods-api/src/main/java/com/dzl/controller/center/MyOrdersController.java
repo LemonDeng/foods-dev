@@ -3,6 +3,8 @@ package com.dzl.controller.center;
 import com.dzl.controller.BaseController;
 //import com.dzl.pojo.vo.OrderStatusCountsVO;
 import com.dzl.pojo.Orders;
+import com.dzl.pojo.bo.center.OrderItemsCommentBO;
+import com.dzl.service.center.MyCommentsService;
 import com.dzl.service.center.MyOrdersService;
 import com.dzl.utils.*;
 import io.swagger.annotations.Api;
@@ -13,13 +15,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @Api(value = "用户中心我的订单", tags = {"用户中心我的订单相关接口"})
 @RestController
 @RequestMapping("myorders")
 public class MyOrdersController extends BaseController {
 
+   /* @Autowired
+    private MyOrdersService myOrdersService;*/
     @Autowired
-    private MyOrdersService myOrdersService;
+    private MyCommentsService myCommentsService;
 
    /* @ApiOperation(value = "获得订单状态数概况", notes = "获得订单状态数概况", httpMethod = "POST")
     @PostMapping("/statusCounts")
@@ -107,17 +113,6 @@ public class MyOrdersController extends BaseController {
 
         return DZLJSONResult.ok();
     }
-    /**
-     * 用于验证用户和订单是否有关联关系，避免非法用户调用
-     * @return
-     */
-    private DZLJSONResult checkUserOrder(String userId, String orderId) {
-        Orders order = myOrdersService.queryMyOrder(userId, orderId);
-        if (order == null) {
-            return DZLJSONResult.errorMsg("订单不存在！");
-        }
-        return DZLJSONResult.ok();
-    }
 
 
     // 商家发货没有后端，所以这个接口仅仅只是用于模拟
@@ -133,6 +128,9 @@ public class MyOrdersController extends BaseController {
         myOrdersService.updateDeliverOrderStatus(orderId);
         return DZLJSONResult.ok();
     }
+
+
+
 
 
 

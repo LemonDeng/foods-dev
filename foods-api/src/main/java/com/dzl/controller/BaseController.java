@@ -1,6 +1,7 @@
 package com.dzl.controller;
 
 import com.dzl.pojo.Orders;
+import com.dzl.service.center.MyOrdersService;
 import com.dzl.utils.DZLJSONResult;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +24,20 @@ public class BaseController {
     //                       |-> 回调通知的url
     String payReturnUrl = "http://api.z.mukewang.com/foodie-dev-api/orders/notifyMerchantOrderPaid";
 
+    @Autowired
+    public MyOrdersService myOrdersService;
+
+    /**
+     * 用于验证用户和订单是否有关联关系，避免非法用户调用
+     * @return
+     */
+    public DZLJSONResult checkUserOrder(String userId, String orderId) {
+        Orders order = myOrdersService.queryMyOrder(userId, orderId);
+        if (order == null) {
+            return DZLJSONResult.errorMsg("订单不存在！");
+        }
+        return DZLJSONResult.ok(order);
+    }
 
 
 

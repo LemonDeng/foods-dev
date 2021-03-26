@@ -1,8 +1,10 @@
 com\dzl\service\center\MyOrdersService.class
 com\dzl\service\impl\CategoryServiceImpl.class
 com\dzl\service\impl\ItemServiceImpl.class
+com\dzl\service\center\MyCommentsService.class
 com\dzl\service\UserService.class
 com\dzl\service\CarouselService.class
+com\dzl\service\impl\center\MyCommentsServiceImpl.class
 com\dzl\service\impl\StuServiceImpl.class
 com\dzl\service\impl\center\CenterUserServiceImpl.class
 com\dzl\service\CategoryService.class
