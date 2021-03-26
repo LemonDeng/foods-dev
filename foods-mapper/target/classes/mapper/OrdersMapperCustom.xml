@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.dzl.mapper.OrdersMapperCustom" >
 
- <!-- <resultMap id="myOrdersVO" type="com.dzl.pojo.vo.MyOrdersVO">
+  <resultMap id="myOrdersVO" type="com.dzl.pojo.vo.MyOrdersVO">
     <id column="orderId" property="orderId"/>
     <result column="createdTime" property="createdTime"/>
     <result column="payMethod" property="payMethod"/>
@@ -10,11 +10,11 @@
       <result column="postAmount" property="postAmount"/>
       <result column="orderStatus" property="orderStatus"/>
       <result column="isComment" property="isComment"/>
-
+<!--解决分页嵌套查询Bug-->
     <collection property="subOrderItemList"
                 select="getSubItems"
                 column="orderId"
-                ofType="com.imooc.pojo.vo.MySubOrderItemVO">
+                ofType="com.dzl.pojo.vo.MySubOrderItemVO">
       <result column="itemId" property="itemId"/>
       <result column="itemName" property="itemName"/>
       <result column="itemImg" property="itemImg"/>
@@ -102,7 +102,7 @@
     </select>
 
 
-    <select id="getMyOrderStatusCounts" parameterType="Map" resultType="int">
+   <!-- <select id="getMyOrderStatusCounts" parameterType="Map" resultType="int">
         SELECT
             count(1)
         FROM
@@ -118,10 +118,10 @@
         <if test="paramsMap.isComment != null">
             and o.is_comment = #{paramsMap.isComment}
         </if>
-    </select>
+    </select>-->
 
 
-    <select id="getMyOrderTrend" parameterType="Map" resultType="com.dzl.pojo.OrderStatus">
+    <!--<select id="getMyOrderTrend" parameterType="Map" resultType="com.dzl.pojo.OrderStatus">
 
         SELECT
             os.order_id as orderId,
