@@ -1,6 +1,8 @@
 package com.dzl.service.impl.center;
 
 import com.dzl.pojo.bo.center.OrderItemsCommentBO;
+import com.dzl.pojo.vo.MyCommentVO;
+import com.dzl.utils.DZLJSONResult;
 import com.github.pagehelper.PageHelper;
 import com.dzl.enums.YesOrNo;
 import com.dzl.mapper.*;
@@ -11,11 +13,16 @@ import com.dzl.pojo.Orders;
 //import com.dzl.pojo.vo.MyCommentVO;
 import com.dzl.service.center.MyCommentsService;
 import com.dzl.utils.PagedGridResult;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
+import org.apache.commons.lang3.StringUtils;
 import org.n3r.idworker.Sid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.Date;
 import java.util.HashMap;
@@ -75,5 +82,20 @@ public class MyCommentsServiceImpl extends BaseService implements MyCommentsServ
         orderStatusMapper.updateByPrimaryKeySelective(orderStatus);
     }
 
+
+    @Transactional(propagation = Propagation.SUPPORTS)
+    @Override
+    public PagedGridResult queryMyComments(String userId,
+                                           Integer page,
+                                           Integer pageSize) {
+
+        Map<String, Object> map = new HashMap<>();
+        map.put("userId", userId);
+
+        PageHelper.startPage(page, pageSize);
+        List<MyCommentVO> list = itemsCommentsMapperCustom.queryMyComments(map);
+
+        return setterPagedGrid(list, page);
+    }
 
 }

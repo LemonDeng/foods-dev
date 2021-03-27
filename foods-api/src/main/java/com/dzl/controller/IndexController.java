@@ -65,21 +65,6 @@ public class IndexController {
         List<CategoryVO> list = categoryService.getSubCatList(rootCatId);
         return DZLJSONResult.ok(list);
     }
-   /* @ApiOperation(value = "获取商品子分类", notes = "获取商品子分类", httpMethod = "GET")
-    @GetMapping("/subCat/{rootCatId}")//rootCatId路径参数，首先需要{}占位符，把路径参数写进去
-    public DZLJSONResult subCat(
-            //接口文档给前端对接人员观看的
-            @ApiParam(name = "rootCatId", value = "一级分类id", required = true)
-            //路径参数在参数位置要加上一个注解@PathVariable
-            @PathVariable Integer rootCatId) {
-        //判断传进来的父id是否为空，则不做任何的查询直接报错
-        if (rootCatId == null) {
-            return DZLJSONResult.errorMsg("分类不存在");
-        }
-
-        List<CategoryVO> list = categoryService.getSubCatList(rootCatId);
-        return DZLJSONResult.ok(list);
-    }*/
 
     @ApiOperation(value = "查询每个一级分类下的最新6条商品数据", notes = "查询每个一级分类下的最新6条商品数据", httpMethod = "GET")
     @GetMapping("/sixNewItems/{rootCatId}")//rootCatId路径参数，首先需要{}占位符，把路径参数写进去
