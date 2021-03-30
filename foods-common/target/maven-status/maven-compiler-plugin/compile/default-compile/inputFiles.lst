@@ -23,6 +23,7 @@ E:\gitRepos\foods-dev\foods-common\src\main\java\com\dzl\enums\OrderStatusEnum.j
 E:\gitRepos\foods-dev\foods-common\src\main\java\com\dzl\utils\PagedGridResult.java
 E:\gitRepos\foods-dev\foods-common\src\main\java\org\n3r\idworker\DayCode.java
 E:\gitRepos\foods-dev\foods-common\src\main\java\org\n3r\idworker\InvalidSystemClock.java
+E:\gitRepos\foods-dev\foods-common\src\main\java\com\dzl\utils\RedisOperator.java
 E:\gitRepos\foods-dev\foods-common\src\main\java\org\n3r\idworker\Code.java
 E:\gitRepos\foods-dev\foods-common\src\main\java\org\n3r\idworker\strategy\DayPrefixRandomCodeStrategy.java
 E:\gitRepos\foods-dev\foods-common\src\main\java\com\dzl\utils\MobileEmailUtils.java
