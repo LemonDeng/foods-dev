@@ -35,8 +35,8 @@
       </foreach>
 
   </select>
-  
-  <!--<resultMap id="myComments" type="com.dzl.pojo.vo.MyCommentVO">
+
+  <resultMap id="myComments" type="com.dzl.pojo.vo.MyCommentVO">
     <id column="commentId" property="commentId"/>
     <result column="content" property="content"/>
     <result column="createdTime" property="createdTime"/>
@@ -68,6 +68,6 @@
     ORDER BY
         ic.created_time
     desc
-  </select>-->
+  </select>
 
 </mapper>

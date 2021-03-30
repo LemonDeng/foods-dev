@@ -2,6 +2,7 @@ E:\gitRepos\foods-dev\foods-pojo\src\main\java\com\dzl\pojo\bo\SubmitOrderBO.jav
 E:\gitRepos\foods-dev\foods-pojo\src\main\java\com\dzl\pojo\ItemsComments.java
 E:\gitRepos\foods-dev\foods-pojo\src\main\java\com\dzl\pojo\ItemsSpec.java
 E:\gitRepos\foods-dev\foods-pojo\src\main\java\com\dzl\pojo\bo\ShopcartBO.java
+E:\gitRepos\foods-dev\foods-pojo\src\main\java\com\dzl\pojo\vo\MyCommentVO.java
 E:\gitRepos\foods-dev\foods-pojo\src\main\java\com\dzl\pojo\vo\ItemInfoVO.java
 E:\gitRepos\foods-dev\foods-pojo\src\main\java\com\dzl\pojo\Category.java
 E:\gitRepos\foods-dev\foods-pojo\src\main\java\com\dzl\pojo\bo\center\CenterUserBO.java
@@ -12,6 +13,7 @@ E:\gitRepos\foods-dev\foods-pojo\src\main\java\com\dzl\pojo\vo\OrderVO.java
 E:\gitRepos\foods-dev\foods-pojo\src\main\java\com\dzl\pojo\OrderStatus.java
 E:\gitRepos\foods-dev\foods-pojo\src\main\java\com\dzl\pojo\vo\MyOrdersVO.java
 E:\gitRepos\foods-dev\foods-pojo\src\main\java\com\dzl\pojo\bo\UserBO.java
+E:\gitRepos\foods-dev\foods-pojo\src\main\java\com\dzl\pojo\vo\OrderStatusCountsVO.java
 E:\gitRepos\foods-dev\foods-pojo\src\main\java\com\dzl\pojo\Items.java
 E:\gitRepos\foods-dev\foods-pojo\src\main\java\com\dzl\pojo\vo\MerchantOrdersVO.java
 E:\gitRepos\foods-dev\foods-pojo\src\main\java\com\dzl\pojo\vo\NewItemsVO.java

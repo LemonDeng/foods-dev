@@ -7,6 +7,7 @@ com\dzl\pojo\bo\UserBO.class
 com\dzl\pojo\vo\SubCategoryVO.class
 com\dzl\pojo\ItemsComments.class
 com\dzl\pojo\Stu.class
+com\dzl\pojo\vo\MyCommentVO.class
 com\dzl\pojo\vo\MyOrdersVO.class
 com\dzl\pojo\Orders.class
 com\dzl\pojo\bo\ShopcartBO.class
@@ -14,6 +15,7 @@ com\dzl\pojo\Carousel.class
 com\dzl\pojo\vo\ItemCommentVO.class
 com\dzl\pojo\vo\MySubOrderItemVO.class
 com\dzl\pojo\vo\NewItemsVO.class
+com\dzl\pojo\vo\OrderStatusCountsVO.class
 com\dzl\pojo\Users.class
 com\dzl\pojo\bo\SubmitOrderBO.class
 com\dzl\pojo\vo\SimpleItemVO.class
