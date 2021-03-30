@@ -1,5 +1,6 @@
 package com.dzl.controller;
 
+import com.dzl.utils.RedisOperator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,28 +14,24 @@ import springfox.documentation.annotations.ApiIgnore;
 @RequestMapping("redis")
 public class RedisController {
     @Autowired
-    private RedisTemplate redisTemplate;
+    private RedisOperator redisOperator;
 
-   // @Autowired
-   // private RedisOperator redisOperator;
+
 
     @GetMapping("/set")
     public Object set(String key, String value) {
-        redisTemplate.opsForValue().set(key, value);
-        //redisOperator.set(key, value);
+        redisOperator.set(key, value);
         return "OK";
     }
 
     @GetMapping("/get")
     public String get(String key) {
-        return (String)redisTemplate.opsForValue().get(key);
-       // return redisOperator.get(key);
+        return redisOperator.get(key);
     }
 
     @GetMapping("/delete")
     public Object delete(String key) {
-       redisTemplate.delete(key);
-      //  redisOperator.del(key);
+       redisOperator.del(key);
         return "OK";
     }
 }
