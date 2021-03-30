@@ -16,8 +16,6 @@ public class RedisController {
     @Autowired
     private RedisOperator redisOperator;
 
-
-
     @GetMapping("/set")
     public Object set(String key, String value) {
         redisOperator.set(key, value);

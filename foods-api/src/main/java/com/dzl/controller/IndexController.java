@@ -8,9 +8,12 @@ import com.dzl.pojo.vo.NewItemsVO;
 import com.dzl.service.CarouselService;
 import com.dzl.service.CategoryService;
 import com.dzl.utils.DZLJSONResult;
+import com.dzl.utils.JsonUtils;
+import com.dzl.utils.RedisOperator;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -18,6 +21,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import springfox.documentation.annotations.ApiIgnore;
 
+import java.util.ArrayList;
 import java.util.List;
 
 //@Controller   SpringMVC里面用的比较多用于页面的跳转
@@ -32,11 +36,24 @@ public class IndexController {
 
     @Autowired
     private CategoryService categoryService;
-//@ApiOperation接口文档的规范化，便于前端人员的观看
+
+    @Autowired
+    private RedisOperator redisOperator;
+    //@ApiOperation接口文档的规范化，便于前端人员的观看
     @ApiOperation(value = "获取首页轮播图列表", notes = "获取首页轮播图列表", httpMethod = "GET")
     @GetMapping("/carousel")
     public DZLJSONResult carousel() {
-        List<Carousel> list = carouselService.queryAll(YesOrNo.YES.type);//使用枚举来增加方法的多样性
+
+        List<Carousel> list = new ArrayList<>();
+        String carouselStr = redisOperator.get("carousel");
+        if (StringUtils.isBlank(carouselStr))
+        {
+            list = carouselService.queryAll(YesOrNo.YES.type);//使用枚举来增加方法的多样性
+            redisOperator.set("carousel", JsonUtils.objectToJson(list));
+        }else
+        {
+            list = JsonUtils.jsonToList(carouselStr,Carousel.class);
+        }
         return DZLJSONResult.ok(list);
     }
 
@@ -48,7 +65,18 @@ public class IndexController {
     @ApiOperation(value = "获取商品分类(一级分类)", notes = "获取商品分类(一级分类)", httpMethod = "GET")
     @GetMapping("/cats")
     public DZLJSONResult cats() {
-        List<Category> list = categoryService.queryAllRootLevelCat();
+
+        List<Category> list = new ArrayList<>();
+        String catsStr = redisOperator.get("cats");
+        if (StringUtils.isBlank(catsStr))
+        {
+            list = categoryService.queryAllRootLevelCat();
+            redisOperator.set("cats",JsonUtils.objectToJson(list));
+        }else
+        {
+            list = JsonUtils.jsonToList(catsStr, Category.class);
+        }
+
         return DZLJSONResult.ok(list);
     }
 
@@ -62,7 +90,18 @@ public class IndexController {
             return DZLJSONResult.errorMsg("分类不存在");
         }
 
-        List<CategoryVO> list = categoryService.getSubCatList(rootCatId);
+        List<CategoryVO> list = new ArrayList<>();
+        String subCatStr = redisOperator.get("subCat");
+        if (StringUtils.isBlank(subCatStr))
+        {
+            list = categoryService.getSubCatList(rootCatId);
+            redisOperator.set("subCat",JsonUtils.objectToJson(list));
+        }else
+        {
+            list = JsonUtils.jsonToList(subCatStr,CategoryVO.class);
+        }
+
+
         return DZLJSONResult.ok(list);
     }
 

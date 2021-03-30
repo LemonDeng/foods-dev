@@ -9,7 +9,9 @@ org\n3r\idworker\Sid$1.class
 org\n3r\idworker\utils\Props.class
 org\n3r\idworker\strategy\DefaultRandomCodeStrategy$1.class
 com\dzl\utils\DZLJSONResult.class
+com\dzl\utils\RedisOperator$1.class
 com\dzl\utils\MD5Utils.class
+com\dzl\utils\RedisOperator.class
 com\dzl\utils\PagedGridResult.class
 org\n3r\idworker\Sid.class
 com\dzl\enums\Sex.class
