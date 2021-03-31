@@ -11,7 +11,8 @@ spring:
     host: 10.10.3.168
     port: 6379
     password: root
-    # Redis 哨兵模式
+
+    # Redis 哨兵模式和项目的整合
 #    database: 1
 #    password: imooc
 #    sentinel:
