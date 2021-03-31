@@ -1,5 +1,9 @@
 package com.dzl.pojo.vo;
 
+import com.dzl.pojo.bo.ShopcartBO;
+
+import java.util.List;
+
 public class OrderVO {
 
     private String orderId;
@@ -19,5 +23,11 @@ public class OrderVO {
 
     public void setMerchantOrdersVO(MerchantOrdersVO merchantOrdersVO) {
         this.merchantOrdersVO = merchantOrdersVO;
+    }
+
+    private List<ShopcartBO> toBeRemovedShopcatdList;
+
+    public List<ShopcartBO> getToBeRemovedShopcatdList() {
+        return toBeRemovedShopcatdList;
     }
 }
