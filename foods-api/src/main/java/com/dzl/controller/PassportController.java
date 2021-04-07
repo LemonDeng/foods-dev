@@ -2,28 +2,31 @@ package com.dzl.controller;
 
 import com.dzl.pojo.Users;
 import com.dzl.pojo.bo.UserBO;
+import com.dzl.pojo.vo.UsersVO;
 import com.dzl.service.UserService;
-import com.dzl.utils.CookieUtils;
-import com.dzl.utils.DZLJSONResult;
-import com.dzl.utils.JsonUtils;
-import com.dzl.utils.MD5Utils;
+import com.dzl.utils.*;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.util.UUID;
 
 //@Controller   SpringMVC里面用的比较多用于页面的跳转
 @Api(value = "注册登录",tags = "用于注册登录的相关接口")
 @RestController   /*默认返回出去的都是json对象*/
 @RequestMapping("passport")/*路由*/
-public class PassportController {
+public class PassportController extends BaseController {
     /*代表一个get请求*/
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private RedisOperator redisOperator;
 
     @ApiOperation(value = "用户名已经存在",notes = "用户名已经存在",httpMethod = "GET")
     @GetMapping("/usernameIsExist")
@@ -82,14 +85,28 @@ public class PassportController {
         //4.实现注册
         Users userResult = userService.createUser(userBO);
 
-        userResult = setNullProperty(userResult);
+       // userResult = setNullProperty(userResult);
+        //  生成用户token
+        String uniqueToken = UUID.randomUUID().toString().trim();
 
-        CookieUtils.setCookie(request,response,"user",JsonUtils.objectToJson(userResult));
-        // TODO 生成用户token，存入redis会话
-        // TODO 同步购物车数据
+        //把生成的token和redis去做一个关联，存入redis会话
+        redisOperator.set(REDIS_USER_TOKEN + ":"+ userResult.getId(), uniqueToken);
+
+        //属性拷贝，封装到一个VO里面，用来返回给前端
+        UsersVO usersVO = new UsersVO();
+        BeanUtils.copyProperties(userResult,usersVO);
+        usersVO.setUserUniqueToken(uniqueToken);
+
+        //设置到前端的Cookie里面
+        CookieUtils.setCookie(request,response,"user",JsonUtils.objectToJson(usersVO),true);
+        // 生成用户token，存入redis会话
+        // 同步购物车数据
         return DZLJSONResult.ok();
 
     }
+
+
+
     /*通过cookie来实现用户信息的显示*/
     @ApiOperation(value = "用户登录",notes = "用户登录",httpMethod = "POST")
     @PostMapping("/login")
@@ -109,23 +126,26 @@ public class PassportController {
             return DZLJSONResult.errorMsg("用户名或密码不能为空");
         }
 
+
         //4.实现登录
         Users userResult = userService.queryUserForLogin(username,
                 MD5Utils.getMD5Str(password));
+
 
         if (userResult == null)
         {
             return DZLJSONResult.errorMsg("用户名或密码不正确");
         }
 
-         userResult = setNullProperty(userResult);
+        // userResult = setNullProperty(userResult);
+        UsersVO usersVO = conventUsersVO(userResult);
 
         /*Cookie里面封装了用户信息*/
-        CookieUtils.setCookie(request,response,"user", JsonUtils.objectToJson(userResult),true);
+        CookieUtils.setCookie(request,response,"user", JsonUtils.objectToJson(usersVO),true);
 
 
-        // TODO 生成用户token，存入redis会话
-        // TODO 同步购物车数据
+        //  生成用户token，存入redis会话
+        //  同步购物车数据
 
 
         return DZLJSONResult.ok(userResult);
@@ -143,6 +163,7 @@ public class PassportController {
         return userResult;
     }
 
+    //用户退出登录前端的cookie和后端的redis保存的用户信息都要清楚掉
     @ApiOperation(value = "用户退出登录", notes = "用户退出登录", httpMethod = "POST")
     @PostMapping("/logout")
     public DZLJSONResult logout(@RequestParam String userId,
@@ -152,8 +173,10 @@ public class PassportController {
         // 清除用户的相关信息的cookie
         CookieUtils.deleteCookie(request, response, "user");
 
-        // TODO 用户退出登录，需要清空购物车
-        // TODO 分布式会话中需要清除用户数据
+        // 用户退出登录，清除redis中user的会话信息
+        redisOperator.del(REDIS_USER_TOKEN + ":" + userId);
+        //  用户退出登录，需要清空购物车
+        //  分布式会话中需要清除用户数据
 
         return DZLJSONResult.ok();
     }

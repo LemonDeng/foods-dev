@@ -5,6 +5,7 @@ import java.util.Date;
 /**
  * 用于展示商品搜索列表结果的VO
  */
+
 public class SearchItemsVO {
 
     private String itemId;

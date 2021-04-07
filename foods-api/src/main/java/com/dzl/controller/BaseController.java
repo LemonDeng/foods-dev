@@ -1,13 +1,18 @@
 package com.dzl.controller;
 
 import com.dzl.pojo.Orders;
+import com.dzl.pojo.Users;
+import com.dzl.pojo.vo.UsersVO;
 import com.dzl.service.center.MyOrdersService;
 import com.dzl.utils.DZLJSONResult;
 
+import com.dzl.utils.RedisOperator;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
 import java.io.File;
+import java.util.UUID;
 
 @Controller
 public class BaseController {
@@ -16,6 +21,12 @@ public class BaseController {
 
     public static final Integer COMMON_PAGE_SIZE = 10;
     public static final Integer PAGE_SIZE = 20;
+
+    @Autowired
+    private RedisOperator redisOperator;
+
+
+    public static final String REDIS_USER_TOKEN = "redis_user_token";
 
     // 支付中心的调用地址
     String paymentUrl = "http://payment.t.mukewang.com/foodie-payment/payment/createMerchantOrder";		// produce
@@ -37,6 +48,22 @@ public class BaseController {
             return DZLJSONResult.errorMsg("订单不存在！");
         }
         return DZLJSONResult.ok(order);
+    }
+
+    public UsersVO conventUsersVO(Users user)
+    {
+        //  生成用户token
+        String uniqueToken = UUID.randomUUID().toString().trim();
+
+        //把生成的token和redis去做一个关联，存入redis会话
+        redisOperator.set(REDIS_USER_TOKEN + ":"+ user.getId(), uniqueToken);
+
+        //属性拷贝，封装到一个VO里面，用来返回给前端
+        UsersVO usersVO = new UsersVO();
+        BeanUtils.copyProperties(user,usersVO);
+        usersVO.setUserUniqueToken(uniqueToken);
+
+        return usersVO;
     }
 
 

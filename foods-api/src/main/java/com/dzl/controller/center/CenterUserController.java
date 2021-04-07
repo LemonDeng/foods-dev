@@ -4,6 +4,7 @@ import com.dzl.controller.BaseController;
 import com.dzl.pojo.Users;
 import com.dzl.pojo.bo.center.CenterUserBO;
 //import com.dzl.resource.FileUpload;
+import com.dzl.pojo.vo.UsersVO;
 import com.dzl.resource.FileUpload;
 import com.dzl.service.center.CenterUserService;
 import com.dzl.utils.CookieUtils;
@@ -62,12 +63,14 @@ public class CenterUserController extends BaseController {
 
         Users userResult = centerUserService.updateUserInfo(userId, centerUserBO);
 
-        userResult = setNullProperty(userResult);
+        UsersVO usersVO = conventUsersVO(userResult);
+
+        // userResult = setNullProperty(userResult);
         //把更新之后的用户信息更新到cookie里面
         CookieUtils.setCookie(request, response, "user",
-                JsonUtils.objectToJson(userResult), true);
+                JsonUtils.objectToJson(usersVO), true);
 
-        // TODO 后续要改，增加令牌token，会整合进redis，分布式会话
+        //  后续要改，增加令牌token，会整合进redis，分布式会话
 
         return DZLJSONResult.ok();
     }
@@ -190,9 +193,11 @@ public class CenterUserController extends BaseController {
         // 更新用户头像到数据库
         Users userResult = centerUserService.updateUserFace(userId, finalUserFaceUrl);
 
-        userResult = setNullProperty(userResult);
+        //userResult = setNullProperty(userResult);
+        UsersVO usersVO = conventUsersVO(userResult);
+
         CookieUtils.setCookie(request, response, "user",
-                JsonUtils.objectToJson(userResult), true);
+                JsonUtils.objectToJson(usersVO), true);
 
         // TODO 后续要改，增加令牌token，会整合进redis，分布式会话
 
