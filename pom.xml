@@ -14,6 +14,7 @@
         <module>foods-mapper</module>
         <module>foods-service</module>
         <module>foods-api</module>
+        <module>foods-dev-search</module>
     </modules>
 
     <!--

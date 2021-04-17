@@ -6,11 +6,12 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="foods-service" />
-        <module name="foods-pojo" />
-        <module name="foods-mapper" />
         <module name="foods-common" />
+        <module name="foods-pojo" />
         <module name="foods-api" />
+        <module name="foods-service" />
+        <module name="foods-dev-search" />
+        <module name="foods-mapper" />
       </profile>
     </annotationProcessing>
   </component>
@@ -18,6 +19,7 @@
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="foods-api" options="-parameters" />
       <module name="foods-common" options="-parameters" />
+      <module name="foods-dev-search" options="-parameters" />
       <module name="foods-mapper" options="-parameters" />
       <module name="foods-pojo" options="-parameters" />
       <module name="foods-service" options="-parameters" />
