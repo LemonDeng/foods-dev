@@ -1,0 +1,32 @@
+-------------------------------------------------------------------------------
+Test set: com.test.ESTest
+-------------------------------------------------------------------------------
+Tests run: 7, Failures: 0, Errors: 7, Skipped: 0, Time elapsed: 34.319 s <<< FAILURE! - in com.test.ESTest
+deleteIndexStu(com.test.ESTest)  Time elapsed: 0.419 s  <<< ERROR!
+org.elasticsearch.client.transport.NoNodeAvailableException: None of the configured nodes are available: [{#transport#-1}{nwnMljcnR_isGbOdY54D6g}{192.168.184.184}{192.168.184.184:9300}]
+	at com.test.ESTest.deleteIndexStu(ESTest.java:61)
+
+highlightStuDoc(com.test.ESTest)  Time elapsed: 0.067 s  <<< ERROR!
+org.elasticsearch.client.transport.NoNodeAvailableException: None of the configured nodes are available: [{#transport#-1}{nwnMljcnR_isGbOdY54D6g}{192.168.184.184}{192.168.184.184:9300}]
+	at com.test.ESTest.highlightStuDoc(ESTest.java:145)
+
+updateStuDoc(com.test.ESTest)  Time elapsed: 0.011 s  <<< ERROR!
+org.elasticsearch.client.transport.NoNodeAvailableException: None of the configured nodes are available: [{#transport#-1}{nwnMljcnR_isGbOdY54D6g}{192.168.184.184}{192.168.184.184:9300}]
+	at com.test.ESTest.updateStuDoc(ESTest.java:85)
+
+deleteStuDoc(com.test.ESTest)  Time elapsed: 0.005 s  <<< ERROR!
+org.elasticsearch.client.transport.NoNodeAvailableException: None of the configured nodes are available: [{#transport#-1}{nwnMljcnR_isGbOdY54D6g}{192.168.184.184}{192.168.184.184:9300}]
+	at com.test.ESTest.deleteStuDoc(ESTest.java:101)
+
+searchStuDoc(com.test.ESTest)  Time elapsed: 0.004 s  <<< ERROR!
+org.elasticsearch.client.transport.NoNodeAvailableException: None of the configured nodes are available: [{#transport#-1}{nwnMljcnR_isGbOdY54D6g}{192.168.184.184}{192.168.184.184:9300}]
+	at com.test.ESTest.searchStuDoc(ESTest.java:114)
+
+getStuDoc(com.test.ESTest)  Time elapsed: 0.005 s  <<< ERROR!
+org.elasticsearch.client.transport.NoNodeAvailableException: None of the configured nodes are available: [{#transport#-1}{nwnMljcnR_isGbOdY54D6g}{192.168.184.184}{192.168.184.184:9300}]
+	at com.test.ESTest.getStuDoc(ESTest.java:94)
+
+createIndexStu(com.test.ESTest)  Time elapsed: 0.068 s  <<< ERROR!
+org.elasticsearch.client.transport.NoNodeAvailableException: None of the configured nodes are available: [{#transport#-1}{nwnMljcnR_isGbOdY54D6g}{192.168.184.184}{192.168.184.184:9300}]
+	at com.test.ESTest.createIndexStu(ESTest.java:55)
+

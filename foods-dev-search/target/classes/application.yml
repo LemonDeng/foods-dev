@@ -1,3 +1,5 @@
+server:
+  port: 8083
 spring:
   datasource:                                           # 数据源的相关配置
     type: com.zaxxer.hikari.HikariDataSource          # 数据源类型：HikariCP
@@ -7,5 +9,5 @@ spring:
     password: root
   data:
     elasticsearch:
-      cluster-nodes: 192.168.184.169:9300
+      cluster-nodes: 192.168.184.184:9300
       cluster-name: es6
